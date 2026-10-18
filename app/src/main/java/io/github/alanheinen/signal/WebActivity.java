@@ -59,6 +59,7 @@ public abstract class WebActivity extends Activity {
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
+        if (BuildConfig.WEB_DEBUG) WebView.setWebContentsDebuggingEnabled(true);
         web = new WebView(this);
         web.setBackgroundColor(getColor(R.color.bg));
         setContentView(web);

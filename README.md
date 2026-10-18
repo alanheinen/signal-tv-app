@@ -45,6 +45,9 @@ docker build -t signal-tv-app-build -f docker/build.Dockerfile docker
 docker run --rm -v "$PWD":/src signal-tv-app-build ./gradlew assembleRelease …
 ```
 
+Add `-Psignal.webDebug=true` for a build whose pages Chrome DevTools can
+inspect over adb (`chrome://inspect`), for debugging on the TV.
+
 CI ([`.github/workflows/apk.yml`](.github/workflows/apk.yml)) builds the APK on
 every push to `main` from repository variables and secrets; the workflow file
 says which.

@@ -20,6 +20,8 @@ android {
         versionName = prop("versionName") ?: "1.0"
         buildConfigField("String", "TV_URL", "\"${prop("tvUrl") ?: "http://tv.example.lan/"}\"")
         buildConfigField("String", "RADIO_URL", "\"${prop("radioUrl") ?: "http://radio.example.lan/"}\"")
+        // -Psignal.webDebug=true lets Chrome DevTools inspect the page over adb.
+        buildConfigField("boolean", "WEB_DEBUG", (prop("webDebug") == "true").toString())
     }
 
     buildFeatures {
