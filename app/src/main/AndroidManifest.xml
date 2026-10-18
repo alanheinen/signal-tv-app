@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Two launcher tiles, one per site, each its own task so both can be open. -->
+<!-- Shared by both apps; each flavor's manifest (src/tv, src/radio) adds its
+     name, tile and launcher activity. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,41 +9,7 @@
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
     <application
-        android:label="Signal"
-        android:icon="@mipmap/ic_tv"
-        android:banner="@drawable/banner_tv"
         android:theme="@style/Signal"
         android:allowBackup="false"
-        android:supportsRtl="true">
-
-        <activity
-            android:name=".TvActivity"
-            android:label="Signal TV"
-            android:icon="@mipmap/ic_tv"
-            android:banner="@drawable/banner_tv"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:taskAffinity="io.github.alanheinen.signal.tv"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout|smallestScreenSize|uiMode|density">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".RadioActivity"
-            android:label="Signal Radio"
-            android:icon="@mipmap/ic_radio"
-            android:banner="@drawable/banner_radio"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:taskAffinity="io.github.alanheinen.signal.radio"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout|smallestScreenSize|uiMode|density">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+        android:supportsRtl="true" />
 </manifest>

@@ -1,4 +1,4 @@
-# Builds the APK on every push to main and attaches it to the run.
+# Builds both APKs (Signal TV and Signal Radio) on every push to main and attaches them to the run.
 #
 # Repository variables SIGNAL_TV_URL and SIGNAL_RADIO_URL set the two sites
 # (otherwise the build points at tv.example.lan and radio.example.lan).
@@ -42,13 +42,17 @@ jobs:
           if [ -n "$KEYSTORE" ] && [ "$GITHUB_EVENT_NAME" != pull_request ]; then
             echo "$KEYSTORE" | base64 -d > "$RUNNER_TEMP/signal.jks"
             ./gradlew --no-daemon assembleRelease "${args[@]}" -Psignal.keystore="$RUNNER_TEMP/signal.jks" -Psignal.storePassword="$STORE_PASSWORD"
-            cp app/build/outputs/apk/release/app-release.apk signal-tv.apk
+            cp app/build/outputs/apk/tv/release/app-tv-release.apk signal-tv.apk
+            cp app/build/outputs/apk/radio/release/app-radio-release.apk signal-radio.apk
           else
             ./gradlew --no-daemon assembleDebug "${args[@]}"
-            cp app/build/outputs/apk/debug/app-debug.apk signal-tv.apk
+            cp app/build/outputs/apk/tv/debug/app-tv-debug.apk signal-tv.apk
+            cp app/build/outputs/apk/radio/debug/app-radio-debug.apk signal-radio.apk
           fi
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: signal-tv-apk
-          path: signal-tv.apk
+          name: signal-apks
+          path: |
+            signal-tv.apk
+            signal-radio.apk

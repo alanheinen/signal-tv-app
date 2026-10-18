@@ -24,6 +24,20 @@ android {
         buildConfigField("boolean", "WEB_DEBUG", (prop("webDebug") == "true").toString())
     }
 
+    // Two apps, one per site: Google TV shows one tile per app, so a single
+    // app with two launcher entries would hide one of them. Signal TV keeps
+    // the original application id, so earlier installs update in place.
+    flavorDimensions += "site"
+    productFlavors {
+        create("tv") {
+            dimension = "site"
+        }
+        create("radio") {
+            dimension = "site"
+            applicationIdSuffix = ".radio"
+        }
+    }
+
     buildFeatures {
         buildConfig = true
     }
